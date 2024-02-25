@@ -11,7 +11,8 @@ export default function ExpenseSection({ trip }) {
     const copyTripExpenseLink = () => {
 
         const link = encodeURIComponent(JSON.stringify(trip));
-        navigator.clipboard.writeText(`http://localhost:3000/trip-expense?data=${link}`);
+        navigator.clipboard.writeText(`${window.location.origin}/trip-expense?data=${link}`);
+        window.alert("Trip expense link copied !!")
     }
 
     useEffect(() => {
@@ -34,8 +35,11 @@ export default function ExpenseSection({ trip }) {
     return (
         <section id="trip-expense my-2">
             <div className="p-3 shadow-xl bg-gray-800 text-white mx-4  rounded-xl overflow-hidden ">
-                <div className="flex m-2 gap-3 items-center justify-end">
-                    <BiSolidCopy size={23} color="white" onClick={copyTripExpenseLink} />
+                <div className="flex m-2 gap-3 items-center justify-end mb-3">
+                    <div className="flex item-center gap-2 cursor-pointer " onClick={copyTripExpenseLink} >
+                        <p className="font-bold" >copy & share</p>
+                        <BiSolidCopy size={23} color="white"  />
+                    </div>
                 </div>
                 <div className="px-6 py-4">
                     <div className="p-3 rounded-xl  text-white">

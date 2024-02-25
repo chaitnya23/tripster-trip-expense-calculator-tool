@@ -57,8 +57,8 @@ export default function CreateTripBox() {
     return (
         <div>
             <p className="text-center text-3xl font-bold text-black md:mx-12 md:my-6 mx-4">Create your trip expense and share with your friends </p>
-            <div className="md:flex gap-4">
-                <div className="md:w-1/2 md:m-auto mx-4 my-12 rounded shadow-xl bg-gray-800 p-2 text-white">
+            <div className="md:flex gap-3">
+                <div className="md:w-1/2 md:m-auto mx-2 my-12 rounded shadow-xl bg-gray-800 p-2 text-white">
 
                     <div className=" mx-auto mt-8">
                         <div className="mb-4">
@@ -186,7 +186,7 @@ export default function CreateTripBox() {
                         </button>
                     </div>
                 </div>
-                <section id="trips">
+                <section id="trips" className="md:w-[40%]">
                     {
                         allTrips.map((trip) => {
                             return <ExpenseSection trip={trip} />
