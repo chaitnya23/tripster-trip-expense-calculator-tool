@@ -21,7 +21,8 @@ export default function ExpenseSection({ trip }) {
         const clipboard = new ClipboardJS(buttonRef.current);
         clipboard.on('success', () => {
            
-            window.alert("Trip expense link copied !!");
+            // window.alert("Trip expense link copied !!");
+            console.log('copied successfully');
            
           });
           clipboard.on('error', () => {
