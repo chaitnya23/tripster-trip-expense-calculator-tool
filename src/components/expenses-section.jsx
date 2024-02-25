@@ -1,21 +1,34 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { AppContext } from "../App";
 import { BiSolidCopy } from "react-icons/bi";
+import ClipboardJS from "clipboard";
 
 export default function ExpenseSection({ trip }) {
+    
+    const buttonRef = useRef(null);
+    const link = encodeURIComponent(JSON.stringify(trip));
+    const copyText = `${window.location.origin}/trip-expense?data=${link}`;
 
     const [payable, setpayable] = useState(trip?.people.map((ele, i) => {
         return { name: ele, payableAmt: 0 };
     }));
 
-    const copyTripExpenseLink = () => {
+    // const copyTripExpenseLink = () => {
 
-        const link = encodeURIComponent(JSON.stringify(trip));
-        navigator.clipboard.writeText(`${window.location.origin}/trip-expense?data=${link}`);
-        window.alert("Trip expense link copied !!")
-    }
-
+    // }
+    
     useEffect(() => {
+        const clipboard = new ClipboardJS(buttonRef.current);
+        clipboard.on('success', () => {
+           
+            window.alert("Trip expense link copied !!");
+           
+          });
+          clipboard.on('error', () => {
+            window.alert("Error in copying !!");
+
+           
+          });
 
         trip?.expenses.map((expense, i) => {
 
@@ -36,9 +49,9 @@ export default function ExpenseSection({ trip }) {
         <section id="trip-expense my-2">
             <div className="p-3 shadow-xl bg-gray-800 text-white mx-4  rounded-xl overflow-hidden ">
                 <div className="flex m-2 gap-3 items-center justify-end mb-3">
-                    <div className="flex item-center gap-2 cursor-pointer " onClick={copyTripExpenseLink} >
+                    <div className="flex item-center gap-2 cursor-pointer " ref={buttonRef} data-clipboard-text={copyText} >
                         <p className="font-bold" >copy & share</p>
-                        <BiSolidCopy size={23} color="white"  />
+                        <BiSolidCopy size={23} color="white"   />
                     </div>
                 </div>
                 <div className="px-6 py-4">
